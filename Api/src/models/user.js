@@ -1,13 +1,16 @@
-import mongoose from 'mongoose'
+import mongoose from '../config/database'
 
-mongoose.connect('mongodb://localhost:27017/project', 
-{useNewUrlParser: true, useUnifiedTopology: true});
-
-const UserModel = mongoose.Schema({
-    name:{type:String,require:true},
-    password:{type:String,require:true}
+const GameSchema = mongoose.Schema({
+  name: { type: String },
+  genre: { type: String }
 })
 
-const User = mongoose.model('User',UserModel)
+const UserSchema = mongoose.Schema({
+  login: { type: String, require: true, unique: true },
+  password: { type: String, require: true },
+  games: [GameSchema]
+})
+
+const User = mongoose.model('User', UserSchema)
 
 export default User
