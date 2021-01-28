@@ -1,46 +1,47 @@
-import React, { useState } from 'react'
-import { Button, TextField } from '@material-ui/core'
+import React, { useState } from "react";
+import { Button, TextField } from "@material-ui/core";
 
-function FormularioCadastro ({ onSubmit, validarCpf }) {
-  const [login, setLogin] = useState('')
-  const [password, setPassword] = useState('')
+function FormularioCadastro({ onSubmit }) {
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <form
       onSubmit={(event) => {
-        event.preventDefault()
-        onSubmit({ login, password })
+        event.preventDefault();
+        onSubmit({ login, password });
       }}
     >
       <TextField
         value={login}
         onChange={(event) => {
-          setLogin(event.target.value)
+          setLogin(event.target.value);
         }}
-        id='nome'
-        label='Nome'
-        variant='outlined'
+        id="login"
+        label="Login"
+        variant="outlined"
         fullWidth
-        margin='normal'
+        margin="normal"
       />
 
       <TextField
         value={password}
         onChange={(event) => {
-          setPassword(event.target.value)
+          setPassword(event.target.value);
         }}
-        id='sobrenome'
-        label='Sobrenome'
-        variant='outlined'
+        id="password"
+        label="Password"
+        variant="outlined"
         fullWidth
-        margin='normal'
+        margin="normal"
+        type="password"s
       />
 
-      <Button type='submit' variant='contained' color='primary'>
+      <Button type="submit" variant="contained" color="primary">
         Cadastrar
       </Button>
     </form>
-  )
+  );
 }
 
-export default FormularioCadastro
+export default FormularioCadastro;
