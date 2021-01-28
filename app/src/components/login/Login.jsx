@@ -3,10 +3,11 @@ import { Container, Typography } from "@material-ui/core";
 import "fontsource-roboto";
 import api from "../../services/api";
 import { useHistory } from "react-router-dom";
+import { useState } from "react";
 
 function Login({ login, logout }) {
   const history = useHistory();
-
+  const [error, setError] = useState({ message: "", validation: false });
   function onSubmitForm(dados) {
     api
       .post("/authenticate", {
@@ -20,6 +21,11 @@ function Login({ login, logout }) {
         console.log(response);
       })
       .catch(function (error) {
+        let object = {
+          message: "Login Error!",
+          validation: true,
+        };
+        setError(object);
         localStorage.setItem("auth", false);
         localStorage.setItem("token", "no token");
         logout();
@@ -31,7 +37,7 @@ function Login({ login, logout }) {
       <Typography variant="h3" align="center" component="h1">
         Welcome!
       </Typography>
-      <FormularioCadastro onSubmit={onSubmitForm} />
+      <FormularioCadastro error={error} onSubmit={onSubmitForm} />
     </Container>
   );
 }

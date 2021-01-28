@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@material-ui/core";
 
-function FormularioCadastro({ onSubmit }) {
+function FormularioCadastro({ onSubmit, error }) {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,6 +22,7 @@ function FormularioCadastro({ onSubmit }) {
         variant="outlined"
         fullWidth
         margin="normal"
+        error={error.validation}
       />
 
       <TextField
@@ -34,7 +35,9 @@ function FormularioCadastro({ onSubmit }) {
         variant="outlined"
         fullWidth
         margin="normal"
-        type="password"s
+        type="password"
+        error={error.validation}
+        helperText={error.message}
       />
 
       <Button type="submit" variant="contained" color="primary">
