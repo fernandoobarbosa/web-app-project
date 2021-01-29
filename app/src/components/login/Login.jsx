@@ -32,12 +32,20 @@ function Login({ login, logout }) {
         console.log(error);
       });
   }
+  function noError() {
+    let object = {
+      message: " ",
+      validation: false,
+    };
+    setError(object);
+  }
   return (
     <Container component="article" maxWidth="sm">
-      <Typography variant="h3" align="center" component="h1">
-        Welcome!
-      </Typography>
-      <FormularioCadastro error={error} onSubmit={onSubmitForm} />
+      <FormularioCadastro
+        error={error}
+        onSubmit={onSubmitForm}
+        noError={noError}
+      />
     </Container>
   );
 }
