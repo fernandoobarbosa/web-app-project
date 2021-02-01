@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 import { useState } from "react";
 
 function Register({ login, logout }) {
+  const [error, setError] = useState({ message: "", validation: false });
   const history = useHistory();
   function onSubmitForm(dados) {
     api
@@ -18,12 +19,24 @@ function Register({ login, logout }) {
         console.log(response);
       })
       .catch(function (error) {
+        let object = {
+          message: "Register Error!",
+          validation: true,
+        };
+        setError(object);
         console.log(error);
       });
   }
+  function noError() {
+    let object = {
+      message: " ",
+      validation: false,
+    };
+    setError(object);
+  }
   return (
     <Container component="article" maxWidth="sm">
-      <FormRegister onSubmit={onSubmitForm} />
+      <FormRegister error={error} onSubmit={onSubmitForm} noError={noError} />
     </Container>
   );
 }

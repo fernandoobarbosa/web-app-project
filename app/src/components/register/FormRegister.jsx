@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FormularioCadastro({ onSubmit }) {
+export default function FormularioCadastro({ error, onSubmit, noError }) {
   const classes = useStyles();
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -77,6 +77,8 @@ export default function FormularioCadastro({ onSubmit }) {
             variant="outlined"
             fullWidth
             margin="normal"
+            error={error.validation}
+            onBlur={noError}
             required
           />
           <TextField
@@ -90,6 +92,9 @@ export default function FormularioCadastro({ onSubmit }) {
             fullWidth
             margin="normal"
             type="password"
+            error={error.validation}
+            onBlur={noError}
+            helperText={error.message}
             required
           />
           <Button type="submit" variant="contained" color="primary">
