@@ -1,16 +1,10 @@
 import mongoose from "../config/database";
-
-// const GameSchema = mongoose.Schema({
-//   name: { type: String },
-//   genre: { type: String }
-// })
-
+import uniqueValidator from "mongoose-unique-validator";
 const UserSchema = mongoose.Schema({
-  login: { type: String, require: true, unique: true },
-  password: { type: String, require: true },
-  // games: [GameSchema]
+  login: { type: String, unique: true, required: true },
+  password: { type: String, required: true },
 });
 
 const User = mongoose.model("User", UserSchema);
-
+UserSchema.plugin(uniqueValidator);
 export default User;
