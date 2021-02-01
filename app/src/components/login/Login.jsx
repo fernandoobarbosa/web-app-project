@@ -1,4 +1,4 @@
-import FormularioCadastro from "./FormularioCadastro";
+import FormLogin from "./FormLogin";
 import { Container, Typography } from "@material-ui/core";
 import "fontsource-roboto";
 import api from "../../services/api";
@@ -41,11 +41,7 @@ function Login({ login, logout }) {
   }
   return (
     <Container component="article" maxWidth="sm">
-      <FormularioCadastro
-        error={error}
-        onSubmit={onSubmitForm}
-        noError={noError}
-      />
+      <FormLogin error={error} onSubmit={onSubmitForm} noError={noError} />
     </Container>
   );
 }

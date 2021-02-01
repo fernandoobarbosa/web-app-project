@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -8,11 +8,10 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { useState } from "react";
+import CreateIcon from "@material-ui/icons/Create";
 
 function Copyright() {
   return (
@@ -47,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FormularioCadastro({ error, onSubmit, noError }) {
+export default function FormularioCadastro({ onSubmit }) {
   const classes = useStyles();
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -57,10 +56,10 @@ export default function FormularioCadastro({ error, onSubmit, noError }) {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <CreateIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign Up
         </Typography>
         <form
           onSubmit={(event) => {
@@ -78,8 +77,7 @@ export default function FormularioCadastro({ error, onSubmit, noError }) {
             variant="outlined"
             fullWidth
             margin="normal"
-            error={error.validation}
-            onBlur={noError}
+            required
           />
           <TextField
             value={password}
@@ -92,22 +90,16 @@ export default function FormularioCadastro({ error, onSubmit, noError }) {
             fullWidth
             margin="normal"
             type="password"
-            error={error.validation}
-            helperText={error.message}
-            onBlur={noError}
+            required
           />
           <Button type="submit" variant="contained" color="primary">
-            Login
+            Register
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
+            <Grid item xs></Grid>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
+              <Link href="/" variant="body2">
+                {"Do you already have an account? Sign In"}
               </Link>
             </Grid>
           </Grid>

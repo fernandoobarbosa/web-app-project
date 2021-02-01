@@ -17,7 +17,7 @@ app.post("/authenticate", (req, res) => {
   loginValidation(req.body.login, req.body.password, res);
 });
 
-app.post("/user", verifyJWT, (req, res) => {
+app.post("/user", (req, res) => {
   createUser(req.body.login, req.body.password, res);
 });
 

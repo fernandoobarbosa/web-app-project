@@ -1,16 +1,16 @@
-import mongoose from '../config/database'
+import mongoose from "../config/database";
 
-const GameSchema = mongoose.Schema({
-  name: { type: String },
-  genre: { type: String }
-})
+// const GameSchema = mongoose.Schema({
+//   name: { type: String },
+//   genre: { type: String }
+// })
 
 const UserSchema = mongoose.Schema({
   login: { type: String, require: true, unique: true },
   password: { type: String, require: true },
-  games: [GameSchema]
-})
+  // games: [GameSchema]
+});
 
-const User = mongoose.model('User', UserSchema)
+const User = mongoose.model("User", UserSchema);
 
-export default User
+export default User;

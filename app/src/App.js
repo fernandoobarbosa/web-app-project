@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Secret from "./components/Secret";
 import Login from "./components/login/Login";
 import Dashboard from "./components/dashboard/Dashboard";
+import Register from "./components/register/Register";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -55,8 +56,8 @@ function App() {
             login={login}
             component={Dashboard}
           />
-          <Route path="*">
-            <div>404 Not found </div>
+          <Route exact path="/register">
+            <Register />
           </Route>
         </Switch>
       </Router>
