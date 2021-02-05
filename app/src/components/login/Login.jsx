@@ -1,12 +1,10 @@
 import FormLogin from "./FormLogin";
-import { Container, Typography } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import "fontsource-roboto";
 import api from "../../services/api";
-import { useHistory } from "react-router-dom";
 import { useState } from "react";
 
 function Login({ login, logout }) {
-  const history = useHistory();
   const [error, setError] = useState({ message: "", validation: false });
   function onSubmitForm(dados) {
     api

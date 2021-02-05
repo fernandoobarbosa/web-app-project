@@ -4,11 +4,9 @@ import {
   Route,
   Switch,
   Redirect,
-  Link,
 } from "react-router-dom";
 
 import ProtectedRoute from "./components/ProtectedRoute";
-import Secret from "./components/Secret";
 import Login from "./components/login/Login";
 import Dashboard from "./components/dashboard/Dashboard";
 import Register from "./components/register/Register";
