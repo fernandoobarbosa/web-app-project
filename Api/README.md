@@ -36,7 +36,7 @@ Este é meu projeto para estudo de nodejs
 ---
 
 ### Criar novo usuário
-*POST /users* - Cria um novo usuário 
+*POST /user* - Cria um novo usuário 
 ---
 #### Parâmetros: 
 | Key            | Local    | Descrição         | Value                     | 
