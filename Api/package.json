@@ -1,7 +1,7 @@
 {
-  "name": "projetocontasimples",
+  "name": "webappproject",
   "version": "1.0.0",
-  "description": "projeto conta simples",
+  "description": "webappproject",
   "main": "app.js",
   "scripts": {
     "start": "nodemon --exec babel-node app.js",
