@@ -24,7 +24,11 @@ function Dashboard({ logout, login, ...rest }) {
   }
   return (
     <section>
-      <Navbar logout={logout} pokeRequest={pokeRequest} />
+      <Navbar
+        logout={logout}
+        pokeRequest={pokeRequest}
+        setShowTable={setShowTable}
+      />
       <Table pokeResponse={pokeResponse} showTable={showTable} />
     </section>
   );

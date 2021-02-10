@@ -82,7 +82,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar({ logout, pokeRequest }) {
+export default function PrimarySearchAppBar({
+  logout,
+  pokeRequest,
+  setShowTable,
+}) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -105,6 +109,14 @@ export default function PrimarySearchAppBar({ logout, pokeRequest }) {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const handleSearchBlur = (event) => {
+    if (event.target.value == "") {
+      setShowTable(false);
+    } else {
+      pokeRequest(event.target.value);
+    }
   };
 
   const menuId = "primary-search-account-menu";
@@ -190,9 +202,7 @@ export default function PrimarySearchAppBar({ logout, pokeRequest }) {
                 input: classes.inputInput,
               }}
               inputProps={{ "aria-label": "search" }}
-              onBlur={(event) => {
-                pokeRequest(event.target.value);
-              }}
+              onBlur={handleSearchBlur}
             />
           </div>
           <div className={classes.grow} />
