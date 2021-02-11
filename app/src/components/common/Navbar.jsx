@@ -112,7 +112,7 @@ export default function PrimarySearchAppBar({
   };
 
   const handleSearchBlur = (event) => {
-    if (event.target.value == "") {
+    if (event.target.value === "") {
       setShowTable(false);
     } else {
       pokeRequest(event.target.value);

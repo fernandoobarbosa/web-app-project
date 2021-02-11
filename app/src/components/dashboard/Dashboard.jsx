@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Table from "./Table";
-import api from "../../services/api";
 import pokeApi from "../../services/pokeApi";
 import Navbar from "../common/Navbar";
 function Dashboard({ logout, login, ...rest }) {
@@ -11,15 +10,11 @@ function Dashboard({ logout, login, ...rest }) {
     pokeApi
       .get("/pokemon/" + pokemon.toLowerCase())
       .then(function (response) {
-        // handle success
-        //console.log(response.data);
         setpokeResponse(response.data);
         setShowTable(true);
       })
       .catch(function (error) {
         setShowTable(false);
-        // handle error
-        //console.log(error);
       });
   }
   return (
