@@ -9,7 +9,6 @@ export const getAll = async () => {
 
 export const authenticate = async (login, password) => {
   const hashPassword = hash(password);
-
   const user = await User.findOne({
     login: login,
     password: hashPassword,
