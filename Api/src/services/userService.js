@@ -17,7 +17,7 @@ export const authenticate = async (login, password) => {
     const id = login; // id do usuário
     const token = jwt.sign({ id }, "keyTest", {
       // verificação do token
-      expiresIn: 300, // tempo do token em segundos
+      expiresIn: 7200, // tempo do token em segundos (2 horas)
     });
     return { auth: true, token: token };
   }
@@ -29,5 +29,33 @@ export const create = async (login, password) => {
   const user = await User.insertMany([
     { login: login, password: hashPassword },
   ]);
+  return user;
+};
+
+export const createNewTask = async (userId, taskName) => {
+  console.log(userId);
+  const user = await User.updateOne(
+    { login: userId },
+    {
+      $push: {
+        tasks: {
+          $each: [
+            { name: taskName, toDo: true, inProgress: false, done: false },
+          ],
+        },
+      },
+    }
+  );
+
+  return user;
+};
+
+export const deleteTaskById = async (userId, taskId) => {
+  const user = await User.update(
+    { login: userId },
+    { $pull: { tasks: { _id: taskId } } },
+    { multi: true }
+  );
+
   return user;
 };

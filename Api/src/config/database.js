@@ -1,7 +1,9 @@
-import mongoose from 'mongoose'
-require('dotenv').config()
+import mongoose from "mongoose";
+require("dotenv").config();
 
-mongoose.connect(process.env.MONGO_URL,
-    { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-export default mongoose
+export default mongoose;

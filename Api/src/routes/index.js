@@ -1,26 +1,22 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import { responseReturner } from "../controllers/pokemonController";
-import { loginValidation } from "../controllers/loginController";
-import { createUser, getUsers, teste1 } from "../controllers/userController";
+import {
+  createUser,
+  getUsers,
+  loginValidation,
+  createTask,
+  deleteTask,
+} from "../controllers/userController";
 import { verifyToken } from "../middleware/verifyToken";
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 const privateRoute = express.Router();
+
+//Rota privada com o middleware de verificação de token
 privateRoute.use(verifyToken);
-
-privateRoute.get("/teste", (req, res, next) => {
-  res.send("hey");
-});
-//app.use(verifyToken);
-//app.use("/authenticate", whiteListed);
-
-app.post("/teste", (req, res) => {
-  const values = responseReturner(req.body.poke, res);
-});
 
 app.post("/authenticate", (req, res) => {
   console.log(req.body);
@@ -34,6 +30,18 @@ app.post("/user", (req, res) => {
 privateRoute.get("/users", (req, res) => {
   console.log(req.userId);
   getUsers(req, res);
+});
+
+privateRoute.post("/task", (req, res) => {
+  createTask(req.userId, req.body.name, res);
+});
+
+privateRoute.delete("/task/:id", (req, res) => {
+  deleteTask(req.userId, req.params.id, res);
+});
+
+privateRoute.put("/task/:id", (req, res) => {
+  deleteTask(req.userId, req.params.id, res);
 });
 
 app.use(privateRoute);
