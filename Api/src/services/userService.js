@@ -59,3 +59,17 @@ export const deleteTaskById = async (userId, taskId) => {
 
   return user;
 };
+
+export const updateTaskInProgress = async (userId, taskId) => {
+  const user = await User.updateOne(
+    { login: userId, "tasks._id": taskId },
+    {
+      $set: {
+        "tasks.$.inProgress": true,
+        "tasks.$.toDo": false,
+        "tasks.$.done": false,
+      },
+    }
+  );
+  return user;
+};

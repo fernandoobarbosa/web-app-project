@@ -8,6 +8,7 @@ import {
   authenticate,
   createNewTask,
   deleteTaskById,
+  updateTaskInProgress,
 } from "../services/userService";
 import jwt from "jsonwebtoken";
 
@@ -53,6 +54,16 @@ export const createTask = (userId, taskName, res) => {
 
 export const deleteTask = (userId, taskId, res) => {
   deleteTaskById(userId, taskId)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(400).send(error.writeErrors[0].errmsg);
+    });
+};
+
+export const setTaskInProgress = (userId, taskId, res) => {
+  updateTaskInProgress(userId, taskId)
     .then((response) => {
       res.status(200).send(response);
     })

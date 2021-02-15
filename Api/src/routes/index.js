@@ -7,6 +7,7 @@ import {
   loginValidation,
   createTask,
   deleteTask,
+  setTaskInProgress,
 } from "../controllers/userController";
 import { verifyToken } from "../middleware/verifyToken";
 
@@ -40,8 +41,8 @@ privateRoute.delete("/task/:id", (req, res) => {
   deleteTask(req.userId, req.params.id, res);
 });
 
-privateRoute.put("/task/:id", (req, res) => {
-  deleteTask(req.userId, req.params.id, res);
+privateRoute.put("/task/:id/inProgress", (req, res) => {
+  setTaskInProgress(req.userId, req.params.id, res);
 });
 
 app.use(privateRoute);
