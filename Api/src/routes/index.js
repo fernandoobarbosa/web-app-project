@@ -42,7 +42,6 @@ privateRoute.delete("/task/:id", (req, res) => {
 });
 
 privateRoute.put("/task/:id/progress", (req, res) => {
-  //res.send(teste3);
   setTaskProgress(
     req.userId,
     req.params.id,
