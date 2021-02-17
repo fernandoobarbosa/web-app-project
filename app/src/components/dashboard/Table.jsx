@@ -58,7 +58,8 @@ export default function DenseTable({ userResponse, showTable, changeTask }) {
               {userResponse.tasks
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
-                  <TableRow key={row._id}>
+                   //Ve se funciona e se te dá uma luz
+                  <TableRow key={row._id} id={row._id}> //Insere o ID aqui
                     <TableCell component="td" scope="row">
                       {index + 1}
                     </TableCell>
@@ -69,7 +70,7 @@ export default function DenseTable({ userResponse, showTable, changeTask }) {
                       <FormControlLabel
                         control={
                           <Checkbox
-                            checked={row.toDo}
+                            checked={() => console.log(row._id)} //Quando vc marcar esse check, vai printar o ID da row pq o id da row está vinculado a ela
                             onChange={handleChange}
                             name="toDo"
                             value={true}
