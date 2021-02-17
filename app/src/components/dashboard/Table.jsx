@@ -19,7 +19,14 @@ const useStyles = makeStyles({
   },
 });
 
-export default function DenseTable({ userResponse, showTable, changeTask }) {
+export default function DenseTable({
+  userResponse,
+  showTable,
+  changeTask,
+  toDoRequest,
+  inProgressRequest,
+  doneRequest,
+}) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const classes = useStyles();
@@ -33,8 +40,22 @@ export default function DenseTable({ userResponse, showTable, changeTask }) {
     setPage(0);
   };
 
-  const handleChange = (event) => {
-    console.log(event);
+  // const handleChange = (event) => {
+  //   console.log(event);
+  // };
+
+  const handleChangeToDo = (event) => {
+    toDoRequest(event);
+  };
+
+  const handleChangeProgress = (event) => {
+    inProgressRequest(event);
+  };
+
+  const handleChangeDone = (event) => {
+    //console.log(event);
+
+    doneRequest(event);
   };
   if (userResponse.tasks !== undefined)
     return (
@@ -58,8 +79,8 @@ export default function DenseTable({ userResponse, showTable, changeTask }) {
               {userResponse.tasks
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => (
-                   //Ve se funciona e se te dá uma luz
-                  <TableRow key={row._id} id={row._id}> //Insere o ID aqui
+                  //Ve se funciona e se te dá uma luz
+                  <TableRow key={row._id} id={row._id}>
                     <TableCell component="td" scope="row">
                       {index + 1}
                     </TableCell>
@@ -70,8 +91,8 @@ export default function DenseTable({ userResponse, showTable, changeTask }) {
                       <FormControlLabel
                         control={
                           <Checkbox
-                            checked={() => console.log(row._id)} //Quando vc marcar esse check, vai printar o ID da row pq o id da row está vinculado a ela
-                            onChange={handleChange}
+                            checked={row.toDo}
+                            onChange={() => handleChangeToDo(row._id)} //Quando vc marcar esse check, vai printar o ID da row pq o id da row está vinculado a ela
                             name="toDo"
                             value={true}
                           />
@@ -83,7 +104,7 @@ export default function DenseTable({ userResponse, showTable, changeTask }) {
                         control={
                           <Checkbox
                             checked={row.inProgress}
-                            onChange={handleChange}
+                            onChange={() => handleChangeProgress(row._id)}
                             name="inProgress"
                           />
                         }
@@ -94,7 +115,7 @@ export default function DenseTable({ userResponse, showTable, changeTask }) {
                         control={
                           <Checkbox
                             checked={row.done}
-                            onChange={handleChange}
+                            onChange={() => handleChangeDone(row._id)}
                             name="done"
                           />
                         }

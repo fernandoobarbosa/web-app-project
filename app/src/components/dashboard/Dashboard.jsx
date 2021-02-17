@@ -28,23 +28,57 @@ function Dashboard({ logout, login, ...rest }) {
       });
   }
 
-  function changeTask(event, id) {
+  function toDoRequest(id) {
     api
-      .post(
-        "/task/" + event,
+      .put(
+        "/task/" + id,
         {
-          firstName: "Fred",
-          lastName: "Flintstone",
+          toDo: true,
         },
         config
       )
       .then(function (response) {
-        console.log(response);
+        window.location.reload();
       })
       .catch(function (error) {
         console.log(error);
       });
   }
+
+  function inProgressRequest(id) {
+    api
+      .put(
+        "/task/" + id,
+        {
+          inProgress: true,
+        },
+        config
+      )
+      .then(function (response) {
+        window.location.reload();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  function doneRequest(id) {
+    api
+      .put(
+        "/task/" + id,
+        {
+          done: true,
+        },
+        config
+      )
+      .then(function (response) {
+        window.location.reload();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   return (
     <section>
       <Navbar
@@ -52,7 +86,13 @@ function Dashboard({ logout, login, ...rest }) {
         userRequest={userRequest}
         setShowTable={setShowTable}
       />
-      <Table showTable={showTable} userResponse={userResponse} />
+      <Table
+        showTable={showTable}
+        userResponse={userResponse}
+        toDoRequest={toDoRequest}
+        inProgressRequest={inProgressRequest}
+        doneRequest={doneRequest}
+      />
     </section>
   );
 }
