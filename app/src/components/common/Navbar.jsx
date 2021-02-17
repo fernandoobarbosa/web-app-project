@@ -84,8 +84,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PrimarySearchAppBar({
   logout,
-  pokeRequest,
+
   setShowTable,
+  userRequest,
 }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -115,7 +116,8 @@ export default function PrimarySearchAppBar({
     if (event.target.value === "") {
       setShowTable(false);
     } else {
-      pokeRequest(event.target.value);
+      //pokeRequest(event.target.value);
+      userRequest();
     }
   };
 
@@ -189,7 +191,7 @@ export default function PrimarySearchAppBar({
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+            Tasks
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -204,6 +206,7 @@ export default function PrimarySearchAppBar({
               inputProps={{ "aria-label": "search" }}
               onBlur={handleSearchBlur}
             />
+            <Button variant="contained">Default</Button>
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>

@@ -1,30 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "./Table";
 import pokeApi from "../../services/pokeApi";
+import api from "../../services/api";
 import Navbar from "../common/Navbar";
 function Dashboard({ logout, login, ...rest }) {
-  const [pokeResponse, setpokeResponse] = useState({});
+  const [userResponse, setUserResponse] = useState({});
   const [showTable, setShowTable] = useState(false);
-  console.log(pokeResponse);
-  function pokeRequest(pokemon) {
-    pokeApi
-      .get("/pokemon/" + pokemon.toLowerCase())
-      .then(function (response) {
-        setpokeResponse(response.data);
+
+  useEffect(() => {
+    userRequest();
+  }, []);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": localStorage.getItem("token"),
+    },
+  };
+  function userRequest() {
+    api
+      .get("/user", config)
+      .then((result) => {
         setShowTable(true);
+        setUserResponse(result.data[0]);
+      })
+      .catch((err) => {
+        setShowTable(false);
+      });
+  }
+
+  function changeTask(event, id) {
+    api
+      .post(
+        "/task/" + event,
+        {
+          firstName: "Fred",
+          lastName: "Flintstone",
+        },
+        config
+      )
+      .then(function (response) {
+        console.log(response);
       })
       .catch(function (error) {
-        setShowTable(false);
+        console.log(error);
       });
   }
   return (
     <section>
       <Navbar
         logout={logout}
-        pokeRequest={pokeRequest}
+        userRequest={userRequest}
         setShowTable={setShowTable}
       />
-      <Table pokeResponse={pokeResponse} showTable={showTable} />
+      <Table showTable={showTable} userResponse={userResponse} />
     </section>
   );
 }
