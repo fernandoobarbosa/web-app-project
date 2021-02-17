@@ -2,9 +2,8 @@ import hash from "object-hash";
 import User from "../models/user";
 import {
   getAll,
+  get,
   create,
-  test,
-  teste,
   authenticate,
   createNewTask,
   deleteTaskById,
@@ -24,6 +23,16 @@ export const createUser = async (login, password, res) => {
 
 export const getUsers = async (req, res) => {
   getAll()
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(400).send(error.writeErrors[0].errmsg);
+    });
+};
+
+export const getUser = async (req, res) => {
+  get(req.userId)
     .then((response) => {
       res.status(200).send(response);
     })

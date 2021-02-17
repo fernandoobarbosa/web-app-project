@@ -7,6 +7,11 @@ export const getAll = async () => {
   return users;
 };
 
+export const get = async (userId) => {
+  const user = await User.find({ login: userId });
+  return user;
+};
+
 export const authenticate = async (login, password) => {
   const hashPassword = hash(password);
   const user = await User.findOne({

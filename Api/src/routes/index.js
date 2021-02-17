@@ -4,6 +4,7 @@ import cors from "cors";
 import {
   createUser,
   getUsers,
+  getUser,
   loginValidation,
   createTask,
   deleteTask,
@@ -28,6 +29,11 @@ app.post("/user", (req, res) => {
   createUser(req.body.login, req.body.password, res);
 });
 
+privateRoute.get("/user", (req, res) => {
+  console.log(req.userId);
+  getUser(req, res);
+});
+
 privateRoute.get("/users", (req, res) => {
   console.log(req.userId);
   getUsers(req, res);
@@ -41,7 +47,7 @@ privateRoute.delete("/task/:id", (req, res) => {
   deleteTask(req.userId, req.params.id, res);
 });
 
-privateRoute.put("/task/:id/progress", (req, res) => {
+privateRoute.put("/task/:id", (req, res) => {
   setTaskProgress(
     req.userId,
     req.params.id,
