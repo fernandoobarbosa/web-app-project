@@ -3,7 +3,11 @@ import Table from "./Table";
 import pokeApi from "../../services/pokeApi";
 import api from "../../services/api";
 import Navbar from "../common/Navbar";
+import { useHistory } from "react-router-dom";
+import Copyright from "../common/Copyright";
+import { Box } from "@material-ui/core";
 function Dashboard({ logout, login, ...rest }) {
+  const history = useHistory();
   const [userResponse, setUserResponse] = useState({});
   const [showTable, setShowTable] = useState(false);
 
@@ -25,6 +29,7 @@ function Dashboard({ logout, login, ...rest }) {
       })
       .catch((err) => {
         setShowTable(false);
+        logout();
       });
   }
 
@@ -79,12 +84,39 @@ function Dashboard({ logout, login, ...rest }) {
       });
   }
 
+  function deleteRequest(id) {
+    api
+      .delete("/task/" + id, config)
+      .then((result) => {
+        window.location.reload();
+      })
+      .catch((err) => {});
+  }
+
+  function createRequest(name) {
+    api
+      .post(
+        "/task/",
+        {
+          name: name,
+        },
+        config
+      )
+      .then(function (response) {
+        window.location.reload();
+      })
+      .catch(function (error) {
+        logout();
+        console.log(error);
+      });
+  }
+
   return (
     <section>
       <Navbar
         logout={logout}
         userRequest={userRequest}
-        setShowTable={setShowTable}
+        createRequest={createRequest}
       />
       <Table
         showTable={showTable}
@@ -92,7 +124,11 @@ function Dashboard({ logout, login, ...rest }) {
         toDoRequest={toDoRequest}
         inProgressRequest={inProgressRequest}
         doneRequest={doneRequest}
+        deleteRequest={deleteRequest}
       />
+      <Box mt={8}>
+        <Copyright />
+      </Box>
     </section>
   );
 }

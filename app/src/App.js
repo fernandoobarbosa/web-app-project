@@ -54,9 +54,6 @@ function App() {
             login={login}
             component={Dashboard}
           />
-          <Route exact path="/register">
-            <Register />
-          </Route>
         </Switch>
       </Router>
     </div>

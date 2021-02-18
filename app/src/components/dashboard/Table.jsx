@@ -11,6 +11,7 @@ import Paper from "@material-ui/core/Paper";
 import Alert from "@material-ui/lab/Alert";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles({
   table: {
@@ -26,6 +27,7 @@ export default function DenseTable({
   toDoRequest,
   inProgressRequest,
   doneRequest,
+  deleteRequest,
 }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -53,9 +55,11 @@ export default function DenseTable({
   };
 
   const handleChangeDone = (event) => {
-    //console.log(event);
-
     doneRequest(event);
+  };
+
+  const handleClick = (event) => {
+    deleteRequest(event);
   };
   if (userResponse.tasks !== undefined)
     return (
@@ -73,6 +77,7 @@ export default function DenseTable({
                 <TableCell>To Do</TableCell>
                 <TableCell>In Progress</TableCell>
                 <TableCell>Done</TableCell>
+                <TableCell></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -120,6 +125,15 @@ export default function DenseTable({
                           />
                         }
                       />
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => handleClick(row._id)}
+                      >
+                        Delete
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}
